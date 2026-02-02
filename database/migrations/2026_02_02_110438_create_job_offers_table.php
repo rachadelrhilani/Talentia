@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('job_offers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // recruteur
+            $table->string('title');
+            $table->text('description');
+            $table->enum('contract_type', ['CDI', 'CDD', 'Stage', 'Freelance', 'Full-time']);
+            $table->string('image');
+            $table->boolean('is_closed')->default(false);
             $table->timestamps();
         });
     }
