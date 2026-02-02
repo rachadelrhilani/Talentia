@@ -7,10 +7,10 @@
     <form method="POST">
         @csrf
 
-        <input name="name" placeholder="Name" class="input">
-        <input name="email" placeholder="Email" class="input">
-        <input type="password" name="password" placeholder="Password" class="input">
-        <input type="password" name="password_confirmation" placeholder="Confirm" class="input">
+        <input name="name" class="w-full border p-2 mb-3 rounded" placeholder="Name" class="input">
+        <input name="email" class="w-full border p-2 mb-3 rounded" placeholder="Email" class="input">
+        <input type="password" class="w-full border p-2 mb-3 rounded" name="password" placeholder="Password" class="input">
+        <input type="password" class="w-full border p-2 mb-3 rounded" name="password_confirmation" placeholder="Confirm" class="input">
 
         <select name="type" class="w-full border p-2 mb-3 rounded">
             <option value="candidat">Chercheur d’emploi</option>
