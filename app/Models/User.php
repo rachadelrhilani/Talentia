@@ -18,10 +18,15 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name','email','password','type','photo','bio'
+        'name',
+        'email',
+        'password',
+        'type',
+        'photo',
+        'bio'
     ];
 
-     public function profile()
+    public function profile()
     {
         return $this->hasOne(Profile::class);
     }
@@ -40,6 +45,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Friendship::class, 'sender_id');
     }
+    public function company()
+    {
+        return $this->hasOne(Companie::class);
+    }
+
 
     public function receivedFriendRequests()
     {
