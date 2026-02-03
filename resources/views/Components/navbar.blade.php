@@ -18,10 +18,10 @@
                     </button>
                 </form>
             @else
-                <a href="{{ route('login') }}" class="text-gray-600 hover:text-blue-600">
+                <a href="{{ route('loginForm') }}" class="text-gray-600 hover:text-blue-600">
                     Login
                 </a>
-                <a href="{{ route('register') }}" class="bg-blue-600 text-white px-4 py-2 rounded">
+                <a href="{{ route('registerForm') }}" class="bg-blue-600 text-white px-4 py-2 rounded">
                     Sign up
                 </a>
             @endauth

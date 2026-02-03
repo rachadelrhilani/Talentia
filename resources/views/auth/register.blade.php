@@ -4,7 +4,7 @@
 <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
     <h2 class="text-xl font-bold mb-4">Sign up</h2>
 
-    <form method="POST">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <input name="name" class="w-full border p-2 mb-3 rounded" placeholder="Name" class="input">
