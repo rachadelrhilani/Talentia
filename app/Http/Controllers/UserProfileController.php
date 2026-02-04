@@ -41,18 +41,68 @@ class UserProfileController extends Controller
     {
         $user = auth()->user();
 
+        // ========================
+        // Validation commune USER
+        // ========================
         $data = $request->validate([
-            'name'  => 'required|string',
+            'name'  => 'required|string|max:255',
             'bio'   => 'nullable|string',
-            'photo' => 'nullable|image|max:2048'
+            'photo' => 'nullable|image|max:2048',
+
+            // candidat
+            'title' => 'nullable|string',
+
+            // recruteur
+            'company_name' => 'nullable|string',
+            'company_description' => 'nullable|string',
         ]);
 
+        // ========================
+        // Upload photo
+        // ========================
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('profiles', 'public');
+            $data['photo'] = $request->file('photo')
+                ->store('profiles', 'public');
         }
 
-        $user->update($data);
+        // ========================
+        // UPDATE USER (commun)
+        // ========================
+        $user->update([
+            'name'  => $data['name'],
+            'bio'   => $data['bio'] ?? null,
+            'photo' => $data['photo'] ?? null ,
+        ]);
 
-        return redirect()->route('profile.show')->with('success', 'Profil mis à jour');
+        // ========================
+        // UPDATE CANDIDAT
+        // ========================
+        if ($user->hasRole('candidat')) {
+
+            $profile = $user->profile;
+
+            if ($profile) {
+                $profile->update([
+                    'title' => $data['title'] ?? $profile->title
+                ]);
+            }
+        }
+
+        // ========================
+        // UPDATE RECRUTEUR
+        // ========================
+        if ($user->hasRole('recruteur')) {
+
+            $company = $user->company;
+
+            if ($company) {
+                $company->update([
+                    'name' => $data['company_name'],
+                    'description' => $data['company_description']
+                ]);
+            }
+        }
+
+        return back()->with('success', 'Profil mis à jour');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Friendship;
 use App\Models\Joboffer;
+use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -15,9 +16,6 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        // ====================
-        // RECRUTEUR DASHBOARD
-        // ====================
         if ($user->hasRole('recruteur')) {
 
             $jobs = Joboffer::withCount('applications')
@@ -41,9 +39,7 @@ class DashboardController extends Controller
             ));
         }
 
-        // ====================
-        // CANDIDAT DASHBOARD
-        // ====================
+        
         $suggestedJobs = Joboffer::where('is_closed', false)
             ->latest()
             ->take(5)
@@ -54,7 +50,7 @@ class DashboardController extends Controller
               ->orWhere('receiver_id', $user->id);
         })->where('status', 'accepted')->count();
 
-        $suggestedUsers = \App\Models\User::where('id','!=',$user->id)
+        $suggestedUsers = User::where('id','!=',$user->id)
             ->inRandomOrder()
             ->take(5)
             ->get();
