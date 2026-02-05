@@ -9,6 +9,7 @@ use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobOfferController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Auth;
 
