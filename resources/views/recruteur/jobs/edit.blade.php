@@ -9,9 +9,9 @@
             Modifier l'offre
         </h1>
 
-        <form action="{{ route('recruteur.jobs.update',$job) }}" method="POST" class="space-y-5">
+        <form action="{{ route('recruteur.jobs.update', $job) }}" method="POST" class="space-y-5">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             {{-- Title --}}
             <div>
@@ -20,19 +20,39 @@
                 </label>
                 <input type="text"
                        name="title"
-                       value="{{ old('title',$job->title) }}"
+                       value="{{ old('title', $job->title) }}"
                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#0a66c2] focus:border-[#0a66c2]">
             </div>
 
-            {{-- Location --}}
-            <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">
-                    Localisation
-                </label>
-                <input type="text"
-                       name="location"
-                       value="{{ old('location',$job->location) }}"
-                       class="w-full border border-gray-300 rounded-lg px-4 py-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {{-- Location --}}
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">
+                        Localisation
+                    </label>
+                    <input type="text"
+                           name="location"
+                           value="{{ old('location', $job->location) }}"
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#0a66c2] focus:border-[#0a66c2]">
+                </div>
+
+                {{-- Contract Type (Select) --}}
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">
+                        Type de contrat
+                    </label>
+                    <select name="contract_type" 
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#0a66c2] focus:border-[#0a66c2]">
+                        @php
+                            $types = ['CDI', 'CDD', 'Stage', 'Freelance', 'Full-time'];
+                        @endphp
+                        @foreach($types as $type)
+                            <option value="{{ $type }}" {{ old('contract_type', $job->contract_type) == $type ? 'selected' : '' }}>
+                                {{ $type }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             {{-- Salary --}}
@@ -42,8 +62,9 @@
                 </label>
                 <input type="text"
                        name="salary"
-                       value="{{ old('salary',$job->salary) }}"
-                       class="w-full border border-gray-300 rounded-lg px-4 py-2">
+                       placeholder="Ex: 5000 DH"
+                       value="{{ old('salary', $job->salary) }}"
+                       class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#0a66c2] focus:border-[#0a66c2]">
             </div>
 
             {{-- Description --}}
@@ -53,21 +74,19 @@
                 </label>
                 <textarea name="description"
                           rows="6"
-                          class="w-full border border-gray-300 rounded-lg px-4 py-2">{{ old('description',$job->description) }}</textarea>
+                          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#0a66c2] focus:border-[#0a66c2]">{{ old('description', $job->description) }}</textarea>
             </div>
 
-            <div class="flex justify-end gap-3 pt-4">
-
+            <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
                 <a href="{{ route('dashboard') }}"
-                   class="px-5 py-2 border border-gray-300 rounded-lg font-bold text-gray-600 hover:bg-gray-100">
+                   class="px-5 py-2 border border-gray-300 rounded-lg font-bold text-gray-600 hover:bg-gray-100 transition">
                     Annuler
                 </a>
 
                 <button type="submit"
-                        class="px-6 py-2 bg-[#0a66c2] text-white rounded-lg font-bold hover:bg-[#004182]">
-                    Enregistrer
+                        class="px-6 py-2 bg-[#0a66c2] text-white rounded-lg font-bold hover:bg-[#004182] transition shadow-md">
+                    Enregistrer les modifications
                 </button>
-
             </div>
 
         </form>

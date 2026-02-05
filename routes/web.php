@@ -72,7 +72,7 @@ Route::middleware(['auth', 'role:recruteur'])
     ->group(function () {
 
     Route::get('/jobs/{job}/edit', [JobController::class,'edit'])->name('jobs.edit');
-        Route::put('/jobs/{job}', [JobController::class,'update'])->name('jobs.update');
+        Route::patch('/jobs/{job}', [JobController::class,'update'])->name('jobs.update');
 
         // entreprise
         Route::get('/company/edit', [CompanyController::class, 'edit'])->name('company.edit');
