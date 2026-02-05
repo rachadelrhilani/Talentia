@@ -9,7 +9,9 @@
                 <div class="h-16 bg-[#004182]"></div>
                 <div class="px-4 -mt-8 mb-4 flex flex-col items-center border-b border-gray-100 pb-4">
                     <div class="w-16 h-16 bg-white rounded-lg border-2 border-white shadow-md flex items-center justify-center overflow-hidden">
-                        <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=0a66c2&color=fff" class="w-full h-full" alt="Logo">
+                        <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=0a66c2&color=fff' }}" 
+     class="w-full h-full object-cover" 
+     alt="{{ auth()->user()->name }}">
                     </div>
                     <h2 class="mt-3 font-bold text-gray-900 hover:underline cursor-pointer text-center leading-tight">
                         {{ auth()->user()->name }}
