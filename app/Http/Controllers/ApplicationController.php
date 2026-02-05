@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
+    public function getapp()
+    {
+        $applications = auth()->user()
+            ->applications()
+            ->with('jobOffer.company')
+            ->latest()
+            ->get();
+
+        return view('candidat.applications.index', compact('applications'));
+    }
+
     public function store(Joboffer $job)
     {
         Application::firstOrCreate([
