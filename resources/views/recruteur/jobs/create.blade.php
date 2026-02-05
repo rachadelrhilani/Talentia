@@ -18,31 +18,58 @@
             <form method="POST" action="{{ route('recruteur.jobs.store') }}" class="p-8 space-y-6">
                 @csrf
 
+                {{-- Title --}}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Intitulé du poste *</label>
-                    <input type="text" name="title" required
+                    <input type="text" name="title" value="{{ old('title') }}" required
                         placeholder="Ex: Développeur Fullstack Laravel"
-                        class="w-full border border-gray-400 p-3 rounded-lg text-black focus:border-black focus:ring-1 focus:ring-black outline-none transition duration-200">
+                        class="w-full border border-gray-300 p-3 rounded-lg text-black focus:border-[#0a66c2] focus:ring-1 focus:ring-[#0a66c2] outline-none transition duration-200">
                     @error('title') <span class="text-red-600 text-xs">{{ $message }}</span> @enderror
                 </div>
 
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Type de contrat *</label>
-                    <select name="contract_type" required
-                        class="w-full border border-gray-400 p-3 rounded-lg text-black bg-white focus:border-black focus:ring-1 focus:ring-black outline-none transition duration-200 appearance-none">
-                        <option value="CDI">CDI</option>
-                        <option value="CDD">CDD</option>
-                        <option value="Stage">Stage / Alternance</option>
-                        <option value="Freelance">Freelance</option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {{-- Location --}}
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Localisation *</label>
+                        <input type="text" name="location" value="{{ old('location') }}" required
+                            placeholder="Ex: Casablanca, Remote..."
+                            class="w-full border border-gray-300 p-3 rounded-lg text-black focus:border-[#0a66c2] focus:ring-1 focus:ring-[#0a66c2] outline-none">
+                        @error('location') <span class="text-red-600 text-xs">{{ $message }}</span> @enderror
+                    </div>
+
+                    {{-- Contract Type --}}
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Type de contrat *</label>
+                        <select name="contract_type" required
+                            class="w-full border border-gray-300 p-3 rounded-lg text-black bg-white focus:border-[#0a66c2] focus:ring-1 focus:ring-[#0a66c2] outline-none transition duration-200 appearance-none">
+                            <option value="" disabled selected>Choisir un type...</option>
+                            @foreach(['CDI', 'CDD', 'Stage', 'Freelance', 'Full-time'] as $type)
+                                <option value="{{ $type }}" {{ old('contract_type') == $type ? 'selected' : '' }}>
+                                    {{ $type }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('contract_type') <span class="text-red-600 text-xs">{{ $message }}</span> @enderror
+                    </div>
                 </div>
 
+                {{-- Salary --}}
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Salaire (Optionnel)</label>
+                    <input type="text" name="salary" value="{{ old('salary') }}"
+                        placeholder="Ex: 8000 - 12000 DH"
+                        class="w-full border border-gray-300 p-3 rounded-lg text-black focus:border-[#0a66c2] focus:ring-1 focus:ring-[#0a66c2] outline-none">
+                    @error('salary') <span class="text-red-600 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                {{-- Description --}}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Description du poste *</label>
                     <textarea name="description" rows="8" required
                         placeholder="Missions, compétences requises, avantages..."
-                        class="w-full border border-gray-400 p-3 rounded-lg text-black focus:border-black focus:ring-1 focus:ring-black outline-none transition duration-200"></textarea>
+                        class="w-full border border-gray-300 p-3 rounded-lg text-black focus:border-[#0a66c2] focus:ring-1 focus:ring-[#0a66c2] outline-none transition duration-200">{{ old('description') }}</textarea>
                     <p class="text-[11px] text-gray-400 mt-1 italic">Conseil : Détaillez bien les technologies utilisées.</p>
+                    @error('description') <span class="text-red-600 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="pt-6 border-t border-gray-100 flex items-center justify-end space-x-4">
@@ -56,9 +83,9 @@
             </form>
         </div>
 
-        <div class="mt-6 flex items-start space-x-3 text-gray-500">
-            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-            <p class="text-xs">
+        <div class="mt-6 flex items-start space-x-3 text-gray-500 text-[12px]">
+            <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            <p>
                 En publiant cette offre, vous acceptez les politiques de recrutement de Talentia. Votre annonce sera visible par des milliers de candidats potentiels.
             </p>
         </div>
