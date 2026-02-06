@@ -45,6 +45,18 @@
                             <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
                         </svg>
                     </div>
+                    <div class="w-14 h-14 bg-white rounded flex-shrink-0 flex items-center justify-center border border-gray-200 overflow-hidden shadow-sm">
+                        @if($job->image)
+                        <img src="{{ asset('storage/' . $job->image) }}" class="w-full h-full object-cover">
+                        @else
+                        <div class="w-full h-full bg-indigo-50 flex items-center justify-center">
+                            <span class="text-[#0a66c2] font-bold text-xl">{{ substr($job->title, 0, 1) }}</span>
+                        </div>
+                        @endif
+                    </div>
+
+
+
 
                     <div class="flex-1">
                         <a href="{{ route('candidat.jobs.show', $job) }}" class="block">
@@ -52,6 +64,9 @@
                                 {{ $job->title }}
                             </h2>
                         </a>
+                        @if($job->salary)
+                        <p class="text-sm text-emerald-600 font-semibold mt-0.5">{{ $job->salary }}</p>
+                        @endif
                         <p class="text-sm text-gray-800">{{ $job->company->name ?? 'Entreprise Partenaire' }}</p>
                         <p class="text-sm text-gray-500 mt-0.5">{{ $job->location ?? 'Maroc (Télétravail)' }}</p>
 
