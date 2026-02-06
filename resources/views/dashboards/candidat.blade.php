@@ -40,7 +40,7 @@
             
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
                 <div class="flex items-center space-x-3">
-                    <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}" class="w-12 h-12 rounded-full border border-gray-100">
+                    <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=0a66c2&color=fff' }}" class="w-12 h-12 rounded-full border border-gray-100">
                     <button class="flex-1 text-left border border-gray-300 rounded-full px-4 py-2.5 text-gray-500 font-semibold text-sm hover:bg-gray-100 transition">
                         Commencer un post...
                     </button>

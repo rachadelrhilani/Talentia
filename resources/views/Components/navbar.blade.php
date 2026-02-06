@@ -88,10 +88,10 @@
             </a>
             @endrole
 
-            {{-- DROPDOWN USER --}}
+            
             <div class="flex flex-col items-center group relative cursor-pointer">
                 <div class="h-6 w-6 rounded-full bg-gray-300 overflow-hidden">
-                    <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}" alt="Avatar">
+                    <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=0a66c2&color=fff' }}"  alt="Avatar">
                 </div>
                 <div class="flex items-center space-x-1">
                     <span class="text-[11px] hidden md:block">Vous</span>
@@ -109,11 +109,6 @@
                 <div class="absolute right-0 top-10 w-40 bg-white shadow-lg rounded border hidden group-hover:block">
                     <a href="{{ route('profile.show') }}"
                         class="block px-4 py-2 text-sm hover:bg-gray-100">Profil</a>
-
-                    @role('recruteur')
-                    <a href="{{ route('recruteur.company.edit') }}"
-                        class="block px-4 py-2 text-sm hover:bg-gray-100">Entreprise</a>
-                    @endrole
 
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf

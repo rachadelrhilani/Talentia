@@ -9,9 +9,9 @@
                 <div class="h-16 bg-[#004182]"></div>
                 <div class="px-4 -mt-8 mb-4 flex flex-col items-center border-b border-gray-100 pb-4">
                     <div class="w-16 h-16 bg-white rounded-lg border-2 border-white shadow-md flex items-center justify-center overflow-hidden">
-                        <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=0a66c2&color=fff' }}" 
-     class="w-full h-full object-cover" 
-     alt="{{ auth()->user()->name }}">
+                        <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=0a66c2&color=fff' }}"
+                            class="w-full h-full object-cover"
+                            alt="{{ auth()->user()->name }}">
                     </div>
                     <h2 class="mt-3 font-bold text-gray-900 hover:underline cursor-pointer text-center leading-tight">
                         {{ auth()->user()->name }}
@@ -37,14 +37,16 @@
         </div>
 
         <div class="md:col-span-6 space-y-4">
-            
+
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex items-center justify-between">
                 <div>
                     <h3 class="font-bold text-gray-900 text-lg">Tableau de bord de recrutement</h3>
                     <p class="text-xs text-gray-500">Gérez vos annonces et suivez vos performances.</p>
                 </div>
                 <a href="{{ route('recruteur.jobs.create') }}" class="bg-[#0a66c2] text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-[#004182] transition shadow-md flex items-center">
-                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
+                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+                    </svg>
                     Publier
                 </a>
             </div>
@@ -65,7 +67,9 @@
                                 </h4>
                                 <div class="flex items-center text-[11px] text-gray-500 space-x-2">
                                     <span class="flex items-center uppercase font-bold tracking-tighter">
-                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" />
+                                        </svg>
                                         {{ $job->created_at->diffForHumans() }}
                                     </span>
                                     <span>•</span>
@@ -77,7 +81,9 @@
 
                             <div class="flex items-center space-x-2 ml-4">
                                 <a href="{{ route('recruteur.jobs.edit', $job) }}" class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
                                 </a>
                                 <a href="{{ route('recruteur.jobs.applications', $job) }}" class="bg-white border border-[#0a66c2] text-[#0a66c2] px-4 py-1.5 rounded-full text-xs font-bold hover:bg-blue-50 transition">
                                     Voir candidats
@@ -98,7 +104,9 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
                 <div class="flex items-center space-x-2 mb-4">
                     <div class="p-1.5 bg-yellow-50 rounded">
-                        <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM13 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM14.586 15.414a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM6.707 14.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM13 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM14.586 15.414a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM6.707 14.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707z" />
+                        </svg>
                     </div>
                     <h3 class="font-bold text-gray-900 text-sm">Conseil Talentia</h3>
                 </div>
@@ -110,7 +118,7 @@
                 </div>
                 <p class="text-[10px] text-gray-400 mt-2 italic">Votre réactivité : Excellente</p>
             </div>
-            
+
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
                 <h3 class="font-bold text-gray-900 text-[11px] uppercase tracking-wider mb-3">Actualités Recrutement</h3>
                 <ul class="space-y-3">
