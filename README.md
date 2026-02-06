@@ -1,4 +1,4 @@
-# 🚀 Talentia — Plateforme de Recrutement Laravel
+# Talentia — Plateforme de Recrutement Laravel
 
 Talentia est une plateforme web développée avec Laravel permettant de connecter des recruteurs et des chercheurs d’emploi.
 
@@ -6,7 +6,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 🎯 Objectifs du Projet
+# Objectifs du Projet
 
 - Utiliser Laravel et ses bonnes pratiques
 - Mettre en place une authentification sécurisée
@@ -16,7 +16,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 🧰 Stack Technique
+# Stack Technique
 
 - Laravel
 - Laravel Breeze / Jetstream
@@ -28,16 +28,16 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 👥 Types d’Utilisateurs
+# Types d’Utilisateurs
 
-## 🧑‍💻 Chercheur d’emploi (Candidat)
+## Chercheur d’emploi (Candidat)
 - Création d’un profil CV
 - Recherche d’offres
 - Postulation
 - Ajout d’amis
 - Gestion des compétences
 
-## 🏢 Recruteur (Entreprise)
+## Recruteur (Entreprise)
 - Création d’offres d’emploi
 - Gestion des offres
 - Consultation des candidatures
@@ -45,7 +45,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 🔐 Authentification & Sécurité
+# Authentification & Sécurité
 
 - Inscription / Connexion sécurisée
 - Gestion des rôles avec Spatie
@@ -55,7 +55,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 👤 Gestion des Profils
+# Gestion des Profils
 
 ## Informations générales
 - Nom
@@ -76,7 +76,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 🔎 Recherche
+# Recherche
 
 - Recherche utilisateurs par :
   - Nom
@@ -85,7 +85,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 💼 Fonctionnalités Candidat
+# Fonctionnalités Candidat
 
 - Gestion du profil CV
 - Recherche d’offres d’emploi
@@ -97,7 +97,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 📢 Fonctionnalités Recruteur
+# Fonctionnalités Recruteur
 
 - Création d’offres
 - Modification des offres
@@ -106,7 +106,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# ⚡ Interactivité (Livewire)
+# Interactivité (Livewire)
 
 - Lazy Loading des offres
 - Actions dynamiques sans reload
@@ -114,7 +114,7 @@ Le système permet la gestion des profils professionnels, la publication d’off
 
 ---
 
-# 🧱 Architecture & Base de Données
+# Architecture & Base de Données
 
 Relations Eloquent utilisées :
 
@@ -132,7 +132,7 @@ Relations Eloquent utilisées :
 
 ---
 
-# 🗃️ Migrations principales
+# Migrations principales
 
 - users
 - profiles
@@ -147,7 +147,7 @@ Relations Eloquent utilisées :
 
 ---
 
-# 🌱 Seeders & Factories
+# Seeders & Factories
 
 - Génération d’offres fictives
 - Création d’utilisateurs test
@@ -156,8 +156,8 @@ Relations Eloquent utilisées :
 
 ---
 
-# ⚙️ Installation du Projet
+# Installation du Projet
 
 ```bash
-git clone https://github.com/username/talentia.git
+git clone https://github.com/rachadelrhilani/talentia.git
 cd talentia

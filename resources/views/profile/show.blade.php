@@ -2,11 +2,20 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto space-y-6 my-10 px-4">
+   @if(session('success'))
+   <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mb-6 flex justify-between items-center" role="alert">
+      <span class="block sm:inline font-bold">{{ session('success') }}</span>
+      <button onclick="this.parentElement.remove()" class="text-green-700 font-bold">
+         &times;
+      </button>
+   </div>
+   @endif
 
-   {{-- ================= PROFILE UPDATE ================= --}}
    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
       <h2 class="text-2xl font-bold text-gray-900 mb-6">Informations personnelles</h2>
-
+      @error('email')
+      <p class="text-red-500 text-xs mt-1 font-semibold">{{ $message }}</p>
+      @enderror
       <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="space-y-4">
          @csrf
          @method('PUT')
@@ -27,7 +36,6 @@
             <textarea name="bio" rows="3" class="w-full border border-gray-300 p-2.5 rounded-lg">{{ $user->bio }}</textarea>
          </div>
 
-         {{-- ===== CANDIDAT SECTION ===== --}}
          @role('candidat')
          <div class="mt-8 pt-8 border-t border-gray-100 space-y-6">
             <h3 class="text-xl font-bold text-indigo-600">Profil Professionnel</h3>

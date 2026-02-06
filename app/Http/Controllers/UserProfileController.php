@@ -13,7 +13,6 @@ class UserProfileController extends Controller
     $user = auth()->user();
 
     if ($user->hasRole('candidat')) {
-        // Kan-zido l-valeurs li khasshom i-kouno ila mal9ach l-profile
         $profile = $user->profile()->with(['educations', 'experiences', 'skills'])
             ->firstOrCreate(
                 ['user_id' => $user->id], 

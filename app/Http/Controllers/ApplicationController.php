@@ -21,12 +21,26 @@ class ApplicationController extends Controller
 
     public function store(Joboffer $job)
     {
+        $user = auth()->user();
+
+        $profile = $user->profile; 
+
+        if (
+            !$profile ||
+            $profile->educations()->count() === 0 ||
+            $profile->experiences()->count() === 0 ||
+            $profile->skills()->count() === 0
+        ) {
+
+            return back()->with('error', 'Votre profil est incomplet. Veuillez remplir vos formations, expériences et compétences.');
+        }
+
         Application::firstOrCreate([
             'job_offer_id' => $job->id,
-            'user_id' => auth()->id()
+            'user_id' => $user->id
         ]);
 
-        return back()->with('success', 'Candidature envoyée');
+        return back()->with('success', 'Candidature envoyée avec succès !');
     }
 
     public function index(Joboffer $job)
