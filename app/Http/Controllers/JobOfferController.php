@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Joboffer;
+use Illuminate\Container\Attributes\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage as FacadesStorage;
 
 class JobOfferController extends Controller
 {
@@ -20,33 +22,41 @@ class JobOfferController extends Controller
     }
 
     public function store(Request $request)
-{
+    {
+        $data = $request->validate([
+            'title'         => 'required|string|max:255',
+            'description'   => 'required|string',
+            'location'      => 'required|string|max:255',
+            'contract_type' => 'required|in:CDI,CDD,Stage,Freelance,Full-time',
+            'salary'        => 'nullable|string|max:255',
+            'image'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation dial l-image
+        ]);
 
-    $data = $request->validate([
-        'title'         => 'required|string|max:255',
-        'description'   => 'required|string',
-        'location'      => 'required|string|max:255',
-        'contract_type' => 'required|in:CDI,CDD,Stage,Freelance,Full-time',
-        'salary'        => 'nullable|string|max:255', // Salary optional
-    ]);
-    if (!auth()->user()->company) {
-        return back()->with('error', "Vous devez d'abord configurer les informations de votre entreprise.");
+        if (!auth()->user()->company) {
+            return back()->with('error', "Vous devez d'abord configurer les informations de votre entreprise.");
+        }
+
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('job_offers', 'public');
+        }
+
+        auth()->user()->jobOffers()->create([
+            'title'         => $data['title'],
+            'description'   => $data['description'],
+            'location'      => $data['location'],
+            'contract_type' => $data['contract_type'],
+            'salary'        => $data['salary'],
+            'image'         => $imagePath,
+            'company_id'    => auth()->user()->company->id,
+            'is_closed'     => false,
+        ]);
+
+        return redirect()
+            ->route('recruteur.jobs.index')
+            ->with('success', 'L\'offre a été publiée avec succès !');
     }
-    auth()->user()->jobOffers()->create([
-        'title'         => $data['title'],
-        'description'   => $data['description'],
-        'location'      => $data['location'],
-        'contract_type' => $data['contract_type'],
-        'salary'        => $data['salary'],
-        'company_id'    => auth()->user()->company->id,
-        'is_closed'     => false, // Default value
-    ]);
-
-    
-    return redirect()
-        ->route('recruteur.jobs.index')
-        ->with('success', 'L\'offre a été publiée avec succès !');
-}
 
     public function edit(Joboffer $job)
     {
@@ -55,15 +65,29 @@ class JobOfferController extends Controller
 
     public function update(Request $request, Joboffer $job)
     {
-        $job->update($request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'contract_type' => 'required'
-        ]));
+        $data = $request->validate([
+            'title'         => 'required|string|max:255',
+            'description'   => 'required|string',
+            'location'      => 'required|string|max:255',
+            'contract_type' => 'required|in:CDI,CDD,Stage,Freelance,Full-time',
+            'salary'        => 'nullable|string|max:255',
+            'image'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-        return redirect()->route('recruteur.jobs.index');
+        if ($request->hasFile('image')) {
+            if ($job->image) {
+                Storage::disk('public')->delete($job->image);
+            }
+            $data['image'] = $request->file('image')->store('job_offers', 'public');
+        }
+
+        $job->update($data);
+
+        return redirect()
+            ->route('recruteur.jobs.index')
+            ->with('success', 'L\'offre a été mise à jour !');
     }
-   
+
 
 
     public function close(Joboffer $job)
