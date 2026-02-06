@@ -39,7 +39,6 @@
 
             <div>
                <label class="block text-sm font-semibold text-gray-700 mb-1">Compétences</label>
-               {{-- Zdna id="skills-select" --}}
                <select name="skills[]" id="skills-select" multiple class="w-full border border-gray-300 p-2.5 rounded-lg h-32">
                   @foreach($skills as $skill)
                   <option value="{{ $skill->id }}"
@@ -50,7 +49,6 @@
                </select>
                <p class="text-xs text-gray-400 mt-1 italic">Choisissez dans la liste ou tapez une nouvelle compétence puis appuyez sur "Entrée".</p>
             </div>
-            {{-- Experience Section --}}
             <div class="space-y-4">
                <h4 class="font-bold text-gray-800 flex items-center gap-2">
                   <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +57,6 @@
                   Dernière Expérience
                </h4>
                @php
-               // Kan-akhdo akhir experience zadha l-user
                $latestExp = $profile->experiences->last();
                @endphp
                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl">

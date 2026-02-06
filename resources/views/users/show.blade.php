@@ -42,7 +42,6 @@
         </h2>
         
         <div class="flex flex-wrap gap-2">
-            {{-- Check if profile exists AND has skills --}}
             @if($user->profile && $user->profile->skills->count() > 0)
                 @foreach($user->profile->skills as $skill)
                     <span class="px-3 py-1.5 bg-gray-50 text-gray-700 border border-gray-200 rounded-lg text-sm font-medium hover:border-indigo-300 transition-colors">
@@ -50,10 +49,72 @@
                     </span>
                 @endforeach
             @else
-                {{-- Message ila makanoch les skills --}}
                 <p class="text-sm text-gray-400 italic">Aucune compétence renseignée.</p>
             @endif
         </div>
+        {{-- Section Expériences et Éducation --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        
+        {{-- Expériences Professionnelles --}}
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                Expériences
+            </h2>
+
+            <div class="space-y-6 relative before:absolute before:inset-y-0 before:left-3 before:w-0.5 before:bg-gray-100">
+                @if($user->profile && $user->profile->experiences->count() > 0)
+                    @foreach($user->profile->experiences as $exp)
+                        <div class="relative pl-8">
+                            <span class="absolute left-0 top-1.5 w-6 h-6 bg-white border-2 border-indigo-500 rounded-full flex items-center justify-center">
+                                <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                            </span>
+                            <h3 class="font-bold text-gray-900 leading-tight">{{ $exp->position }}</h3>
+                            <p class="text-indigo-600 font-medium text-sm">{{ $exp->company }}</p>
+                            <p class="text-xs text-gray-400 mt-1">
+                                {{ \Carbon\Carbon::parse($exp->start_date)->format('M Y') }} - 
+                                {{ $exp->end_date ? \Carbon\Carbon::parse($exp->end_date)->format('M Y') : 'Présent' }}
+                            </p>
+                        </div>
+                    @endforeach
+                @else
+                    <p class="text-sm text-gray-400 italic pl-8">Aucune expérience renseignée.</p>
+                @endif
+            </div>
+        </div>
+
+        {{-- Éducation / Diplômes --}}
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                </svg>
+                Éducation
+            </h2>
+
+            <div class="space-y-6 relative before:absolute before:inset-y-0 before:left-3 before:w-0.5 before:bg-gray-100">
+                @if($user->profile && $user->profile->educations->count() > 0)
+                    @foreach($user->profile->educations as $edu)
+                        <div class="relative pl-8">
+                            <span class="absolute left-0 top-1.5 w-6 h-6 bg-white border-2 border-purple-500 rounded-full flex items-center justify-center">
+                                <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                            </span>
+                            <h3 class="font-bold text-gray-900 leading-tight">{{ $edu->degree }}</h3>
+                            <p class="text-purple-600 font-medium text-sm">{{ $edu->school }}</p>
+                            <p class="text-xs text-gray-400 mt-1">
+                                {{ $edu->year_start }} - {{ $edu->year_end ?? 'En cours' }}
+                            </p>
+                        </div>
+                    @endforeach
+                @else
+                    <p class="text-sm text-gray-400 italic pl-8">Aucun diplôme renseigné.</p>
+                @endif
+            </div>
+        </div>
+    </div>
     </div>
 @endif
 

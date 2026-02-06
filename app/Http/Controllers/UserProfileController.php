@@ -84,7 +84,6 @@ class UserProfileController extends Controller
                 'title' => $data['title']
             ]);
 
-            // Sync Skills (Pivot table)
             if ($request->has('skills')) {
                 $profile->skills()->sync($data['skills']);
             }
